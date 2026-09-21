@@ -4,7 +4,7 @@
   "id": "opencode",
   "light": {
     "palette": {
-      "neutral": "#ffffff",
+      "neutral": "#ffeef5",
       "ink": "#1a1a1a",
       "primary": "#dc5793",
       "accent": "#b5397c",
@@ -46,7 +46,7 @@
   },
   "dark": {
     "palette": {
-      "neutral": "#0a0a0a",
+      "neutral": "#c2185b",
       "ink": "#eeeeee",
       "primary": "#ff8bab",
       "accent": "#dc5fa3",
