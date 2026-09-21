@@ -37,7 +37,7 @@ const tui: TuiPlugin = async (api) => {
     order: 100,
     slots: {
       home_bottom() {
-        const hidden = createMemo(() => api.kv.get("tips_hidden", false))
+        const hidden = createMemo(() => api.kv.get("tips_hidden", true))
         const first = createMemo(() => api.state.session.count() === 0)
         const connected = createMemo(() =>
           api.state.provider.some(
