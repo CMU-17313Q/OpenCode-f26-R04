@@ -35,7 +35,8 @@ const args = hideBin(process.argv)
 function show(out: string) {
   const text = out.trimStart()
   if (!text.startsWith("opencode ")) {
-    process.stderr.write(UI.logo() + EOL + EOL)
+    process.stderr.write(UI.logo() + EOL)
+    process.stderr.write(UI.Style.TEXT_DIM + "AI coding agent, built for the terminal." + UI.Style.TEXT_NORMAL + EOL + EOL)
     process.stderr.write(text + EOL)
     return
   }
