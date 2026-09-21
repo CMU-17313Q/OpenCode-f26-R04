@@ -23,6 +23,8 @@ export function DialogThemeList() {
   return (
     <DialogSelect
       title="Themes"
+      placeholder="Search themes…"
+      footer={<text fg={theme.theme.textMuted}>Browse to preview. Select to apply.</text>}
       options={options}
       current={initial}
       onMove={(opt) => {
