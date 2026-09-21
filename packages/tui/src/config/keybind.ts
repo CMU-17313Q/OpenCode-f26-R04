@@ -38,14 +38,14 @@ type Definition = {
   description: string
 }
 
-export const LeaderDefault = "ctrl+x"
+export const LeaderDefault = "ctrl+n"
 
 const keybind = (value: Definition["default"], description: string): Definition => ({ default: value, description })
 
 export const Definitions = {
   leader: keybind(LeaderDefault, "Leader key for keybind combinations"),
 
-  app_exit: keybind("ctrl+c,ctrl+d,<leader>q", "Exit the application"),
+  app_exit: keybind("<leader>q", "Exit the application"),
   app_debug: keybind("none", "Toggle debug panel"),
   app_console: keybind("none", "Toggle console"),
   app_heap_snapshot: keybind("none", "Write heap snapshot"),
