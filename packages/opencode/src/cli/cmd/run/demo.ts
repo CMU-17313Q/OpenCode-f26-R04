@@ -10,7 +10,7 @@
 //   /permission [kind] → triggers a permission request variant
 //   /question [kind]   → triggers a question request variant
 //   /fmt <kind>   → emits a specific tool/text type (text, reasoning, bash,
-//                   write, edit, patch, task, todo, question, error, mix)
+//                   write, edit, patch, task, todo, question, error, grep, mix)
 //
 // Demo mode also handles permission and question replies locally, completing
 // or failing the synthetic tool parts as appropriate.
@@ -33,6 +33,7 @@ const KINDS = [
   "todo",
   "question",
   "error",
+  "grep",
   "mix",
 ]
 const PERMISSIONS = ["edit", "bash", "read", "task", "external", "doom"] as const
@@ -599,6 +600,31 @@ async function emitBash(state: State, signal?: AbortSignal): Promise<void> {
   })
 }
 
+async function emitGrep(state: State, signal?: AbortSignal): Promise<void> {
+  const ref = make(state, "grep", {
+    pattern: "TODO",
+    path: process.cwd(),
+    include: "*.ts",
+  })
+  startTool(state, ref)
+  await wait(70, signal)
+  doneTool(state, ref, {
+    title: "TODO",
+    output: [
+      "Found 3 matches in 2 files",
+      "src/demo-format.ts:",
+      "  Line 4: // TODO: replace with real formatter output",
+      "  Line 9: // TODO: cover reducer edge cases",
+      "README-demo.md:",
+      "  Line 2: <!-- TODO: fill in real docs -->",
+    ].join("\n"),
+    metadata: {
+      matches: 3,
+      truncated: false,
+    },
+  })
+}
+
 function emitWrite(state: State): void {
   const file = path.join(process.cwd(), "src", "demo-format.ts")
   const ref = make(state, "write", {
@@ -1081,12 +1107,18 @@ async function emitFmt(state: State, kind: string, body: string, signal?: AbortS
     return true
   }
 
+  if (kind === "grep") {
+    await emitGrep(state, signal)
+    return true
+  }
+
   if (kind === "mix") {
     await emitText(state, SAMPLE_MARKDOWN, signal)
     await wait(50, signal)
     await emitReasoning(state, "Thinking through formatter edge cases [REDACTED].", signal)
     await wait(50, signal)
     await emitBash(state, signal)
+    await emitGrep(state, signal)
     emitWrite(state)
     emitEdit(state)
     emitPatch(state)
