@@ -28,7 +28,7 @@ import { useEvent } from "../../context/event"
 import { editorSelectionKey, useEditorContext, type EditorSelection } from "../../context/editor"
 import { normalizePromptContent, openEditor } from "../../editor"
 import { useExit } from "../../context/exit"
-import { promptOffsetWidth } from "../../prompt/display"
+import { formatCharacterCount, promptOffsetWidth } from "../../prompt/display"
 import { createStore, produce, unwrap } from "solid-js/store"
 import { usePromptHistory, type PromptInfo } from "../../prompt/history"
 import { computePromptTraits } from "../../prompt/traits"
@@ -211,7 +211,6 @@ export function Prompt(props: PromptProps) {
   const move = usePromptMove({ projectID: project.project, sessionID: () => props.sessionID })
   const [cursorVersion, setCursorVersion] = createSignal(0)
   const currentProviderLabel = createMemo(() => local.model.parsed().provider)
-  const hasRightContent = createMemo(() => Boolean(props.right))
 
   function promptModelWarning() {
     toast.show({
@@ -297,6 +296,8 @@ export function Prompt(props: PromptProps) {
     extmarkToPartIndex: new Map(),
     interrupt: 0,
   })
+  const characterCount = createMemo(() => formatCharacterCount(store.prompt.input))
+  const hasRightContent = createMemo(() => Boolean(props.right) || store.prompt.input.length > 0)
 
   createEffect(
     on(
@@ -1478,6 +1479,9 @@ export function Prompt(props: PromptProps) {
               </box>
               <Show when={hasRightContent()}>
                 <box flexDirection="row" gap={1} alignItems="center">
+                  <Show when={store.prompt.input.length > 0}>
+                    <text fg={theme.textMuted}>{characterCount()}</text>
+                  </Show>
                   {props.right}
                 </box>
               </Show>
