@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { errorData, errorFormat, errorMessage } from "../../src/util/error"
+import { errorData, errorFormat, errorHint, errorMessage } from "../../src/util/error"
 
 describe("util.error", () => {
   test("formats native Error instances", () => {
@@ -45,5 +45,24 @@ describe("util.error", () => {
     const data = errorData(err)
     expect(data.message).toBe("ResolveMessage: Cannot resolve module")
     expect(String(data.formatted)).toContain("ResolveMessage")
+  })
+
+  test("hints at /connect for provider auth and free tier errors", () => {
+    const hint = "Run /connect to add or update an AI provider"
+    expect(errorHint({ name: "ProviderAuthError", data: { providerID: "openai", message: "no key" } })).toBe(hint)
+    expect(errorHint({ name: "APIError", data: { message: "unauthorized", statusCode: 401 } })).toBe(hint)
+    expect(
+      errorHint({
+        name: "APIError",
+        data: { message: "Error from provider (Console): OpenCode's free tier can only be used from within OpenCode" },
+      }),
+    ).toBe(hint)
+  })
+
+  test("gives no hint for unrelated errors", () => {
+    expect(errorHint({ name: "APIError", data: { message: "server exploded", statusCode: 500 } })).toBeUndefined()
+    expect(errorHint({ name: "MessageAbortedError", data: { message: "aborted" } })).toBeUndefined()
+    expect(errorHint(new Error("boom"))).toBeUndefined()
+    expect(errorHint(undefined)).toBeUndefined()
   })
 })

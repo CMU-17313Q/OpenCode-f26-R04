@@ -56,7 +56,7 @@ import { Sidebar } from "./sidebar"
 import { SubagentFooter } from "./subagent-footer.tsx"
 import { filetype } from "../../util/filetype"
 import parsers from "../../parsers-config"
-import { errorMessage } from "../../util/error"
+import { errorHint, errorMessage } from "../../util/error"
 import { Toast, useToast } from "../../ui/toast"
 import { useKV } from "../../context/kv.tsx"
 import stripAnsi from "strip-ansi"
@@ -1543,6 +1543,9 @@ function AssistantMessage(props: { message: AssistantMessage; parts: Part[]; las
           borderColor={theme.error}
         >
           <text fg={theme.textMuted}>{errorMessage(props.message.error)}</text>
+          <Show when={errorHint(props.message.error)}>
+            {(hint) => <text fg={theme.warning}>{hint()}</text>}
+          </Show>
         </box>
       </Show>
       <Switch>
