@@ -54,7 +54,7 @@ export const Definitions = {
   app_toggle_diffwrap: keybind("none", "Toggle diff wrapping"),
   app_toggle_paste_summary: keybind("none", "Toggle paste summary"),
   app_toggle_session_directory_filter: keybind("none", "Toggle session directory filtering"),
-  command_list: keybind("ctrl+p", "List available commands"),
+  command_list: keybind("ctrl+s", "List available commands"),
   help_show: keybind("none", "Open help dialog"),
   docs_open: keybind("none", "Open documentation"),
   diff_open: keybind("none", "Open diff viewer"),
