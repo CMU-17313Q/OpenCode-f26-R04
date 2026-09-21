@@ -290,7 +290,7 @@ export function createPromptState(input: PromptInput): PromptState {
       return ""
     }
 
-    return new StyledText([fg(input.theme().muted)('Ask anything... "Fix a TODO in the codebase"')])
+    return new StyledText([fg(input.theme().muted)('Ask anything... "Explain this codebase"')])
   })
 
   let history = createPromptHistory(input.history)
