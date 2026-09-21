@@ -1,5 +1,0 @@
-{
-  "name": "TypeScript Recitation",
-  "image": "node:24-slim",
-  "postCreateCommand": "apt-get update && apt-get install -y git python3 make g++ && npm install -g bun"
-}
