@@ -6,9 +6,9 @@
     --syntax-keyword: light-dark(#a753ae, #edb2f1);
     --syntax-string: #00ceb9;
     --syntax-primitive: light-dark(#034cff, #8cb0ff);
-    --syntax-property: light-dark(#a753ae, #fab283);
+    --syntax-property: light-dark(#a753ae, #ff8bab);
     --syntax-type: light-dark(#8a6f00, #fcd53a);
-    --syntax-critical: light-dark(#ff8c00, #fab283);
+    --syntax-critical: light-dark(#ff8c00, #ff8bab);
   }
 
   :root {
