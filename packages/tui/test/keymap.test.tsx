@@ -5,7 +5,14 @@ import { testRender, useRenderer } from "@opentui/solid"
 import { expect, test } from "bun:test"
 import { onCleanup } from "solid-js"
 import { TuiKeybind } from "../src/config/keybind"
-import { getOpencodeModeStack, OPENCODE_BASE_MODE, OpencodeKeymapProvider, registerOpencodeKeymap } from "../src/keymap"
+import {
+  COMMAND_PALETTE_COMMAND,
+  getOpencodeModeStack,
+  OPENCODE_BASE_MODE,
+  OpencodeKeymapProvider,
+  registerOpencodeKeymap,
+  useCommandSlashes,
+} from "../src/keymap"
 
 function createResolvedKeymapConfig(input: TuiKeybind.KeybindOverrides = {}) {
   const keybinds = TuiKeybind.parse(input)
@@ -135,6 +142,55 @@ test("mode-less bindings stay active when opencode mode changes", async () => {
         "model.list": 0,
       },
     })
+  } finally {
+    app.renderer.destroy()
+  }
+})
+
+test("command palette is available as a slash command", async () => {
+  let slashes: ReturnType<typeof useCommandSlashes> | undefined
+
+  function SlashCommands() {
+    slashes = useCommandSlashes()
+    return <box />
+  }
+
+  function Harness() {
+    const renderer = useRenderer()
+    const keymap = createDefaultOpenTuiKeymap(renderer)
+    const config = createResolvedKeymapConfig()
+    const offKeymap = registerOpencodeKeymap(keymap, renderer, config)
+    const offLayer = keymap.registerLayer({
+      commands: [
+        {
+          namespace: "palette",
+          name: COMMAND_PALETTE_COMMAND,
+          title: "Show command palette",
+          slashName: "commands",
+          run() {},
+        },
+      ],
+    })
+    onCleanup(() => {
+      offLayer()
+      offKeymap()
+    })
+
+    return (
+      <OpencodeKeymapProvider keymap={keymap}>
+        <SlashCommands />
+      </OpencodeKeymapProvider>
+    )
+  }
+
+  const app = await testRender(() => <Harness />)
+  try {
+    expect(slashes?.().map((entry) => ({ display: entry.display, description: entry.description }))).toEqual([
+      {
+        display: "/commands",
+        description: "Show command palette",
+      },
+    ])
   } finally {
     app.renderer.destroy()
   }

@@ -564,7 +564,7 @@ function App(props: { onSnapshot?: () => Promise<string[]>; pluginHost: TuiPlugi
         name: COMMAND_PALETTE_COMMAND,
         title: "Show command palette",
         category: "System",
-        hidden: true,
+        slashName: "commands",
         run: () => {
           dialog.replace(() => <CommandPaletteDialog />)
         },

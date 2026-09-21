@@ -46,8 +46,8 @@ type ResolvedKeymapConfig = FormatConfig & { leader_timeout: number }
 
 const modeStacks = new WeakMap<OpenTuiKeymap, OpencodeModeStack>()
 
-function isVisiblePaletteCommand(command: Command) {
-  return command.hidden !== true && command.name !== COMMAND_PALETTE_COMMAND
+function isVisibleSlashCommand(command: Command) {
+  return command.hidden !== true
 }
 
 export function createOpencodeModeStack(keymap: OpenTuiKeymap) {
@@ -263,7 +263,7 @@ export function useCommandSlashes(): Accessor<readonly CommandSlashEntry[]> {
     keymap.getCommandEntries({
       visibility: "reachable",
       namespace: "palette",
-      filter: isVisiblePaletteCommand,
+      filter: isVisibleSlashCommand,
     }),
   )
 

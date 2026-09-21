@@ -1,0 +1,19 @@
+{
+  "name": "OpenCode",
+  "image": "ghcr.io/anomalyco/build/bun-node:24.04",
+  "postCreateCommand": "bun install",
+  "forwardPorts": [4096, 5173],
+  "portsAttributes": {
+    "4096": {
+      "label": "OpenCode API"
+    },
+    "5173": {
+      "label": "OpenCode Web"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["oven.bun-vscode"]
+    }
+  }
+}

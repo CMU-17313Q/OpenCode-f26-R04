@@ -39,6 +39,12 @@ https://github.com/anomalyco/models.dev
   bun dev
   ```
 
+### Dev Container
+
+The repository includes a dev container with the required Bun and Node.js versions. Open the repository in a
+dev-container-compatible editor and rebuild it when prompted. Dependencies are installed automatically after the
+container is created.
+
 ### Running against a different directory
 
 By default, `bun dev` runs OpenCode in the `packages/opencode` directory. To run it against a different directory or repository:
