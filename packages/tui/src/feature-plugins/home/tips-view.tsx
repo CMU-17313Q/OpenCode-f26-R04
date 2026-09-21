@@ -133,7 +133,10 @@ export function Tips(props: { api: TuiPluginApi; connected?: boolean }) {
     themeList: useCommandShortcut("theme.switch"),
   }
   const tip = createMemo(() => {
-    if (props.connected === false) return NO_MODELS_TIP
+    if (props.connected === false) {
+      const commandTip = press(shortcuts.commandList(), "to explore available commands")
+      return commandTip ? `${NO_MODELS_TIP}. ${commandTip}` : NO_MODELS_TIP
+    }
     const tips = [...TIPS, process.platform !== "win32" ? TERMINAL_SUSPEND_TIP : INPUT_UNDO_TIP].flatMap((item) => {
       const value = typeof item === "string" ? item : item(shortcuts)
       return value ? [value] : []
