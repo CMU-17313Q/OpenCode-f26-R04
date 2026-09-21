@@ -7,14 +7,14 @@ export function DialogAgent() {
   const local = useLocal()
   const dialog = useDialog()
 
+  const current = createMemo(() => local.agent.current()?.name)
+
   const options = createMemo(() =>
-    local.agent.list().map((item) => {
-      return {
-        value: item.name,
-        title: item.name,
-        description: item.native ? "native" : item.description,
-      }
-    }),
+    local.agent.list().map((item) => ({
+      value: item.name,
+      title: item.name === current() ? `${item.name} (current)` : item.name,
+      description: item.native ? "native" : item.description,
+    })),
   )
 
   return (
