@@ -70,6 +70,7 @@ const dict: Record<string, string> = {
   "provider.connect.toast.connected.description": "{{provider}} models are now available to use.",
   "common.continue": "Continue",
   "model.tag.free": "Free",
+  "model.tag.stealth": "Stealth",
   "model.tag.latest": "Latest",
   "model.input.text": "text",
   "model.input.image": "image",

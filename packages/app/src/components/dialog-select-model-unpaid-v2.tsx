@@ -109,6 +109,9 @@ export const DialogSelectModelUnpaidV2: Component<{ model?: ModelState }> = (pro
                     <Show when={item.latest}>
                       <Tag class="shrink-0">{language.t("model.tag.latest")}</Tag>
                     </Show>
+                    <Show when={item.id === "big-pickle"}>
+                      <Tag class="shrink-0">{language.t("model.tag.stealth")}</Tag>
+                    </Show>
                     <Show when={currentKey() === modelKey(item)}>
                       <Icon name="check" class="ml-auto size-4 shrink-0 text-v2-icon-icon-base" />
                     </Show>
