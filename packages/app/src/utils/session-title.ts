@@ -1,4 +1,4 @@
-const pattern = /^(New session|Child session) - \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
+const pattern = /^(New session|Child session) - [A-Z][a-z]{2} \d{1,2}, \d{4}, \d{1,2}:\d{2} (AM|PM)$/
 
 interface Info {
   readonly title?: string
@@ -9,7 +9,14 @@ interface Info {
 }
 
 export function withTimestampedFallback(info: Info) {
-  return info.title ?? `${info.parentID ? "Child" : "New"} session - ${new Date(info.time.created).toISOString()}`
+  return (
+    info.title ??
+    `${info.parentID ? "Child" : "New"} session - ${new Intl.DateTimeFormat("en-US", {
+      dateStyle: "medium",
+      timeStyle: "short",
+      timeZone: "UTC",
+    }).format(new Date(info.time.created))}`
+  )
 }
 
 export function sessionTitle(title?: string) {
