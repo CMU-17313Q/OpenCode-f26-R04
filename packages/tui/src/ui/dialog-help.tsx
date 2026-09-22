@@ -30,6 +30,11 @@ export function DialogHelp() {
           Press {commandShortcut()} to see all available actions and commands in any context.
         </text>
       </box>
+      <box paddingBottom={1}>
+        <text fg={theme.textMuted}>
+          New: this line was added as part of the 17-313Q recitation exercise.
+        </text>
+      </box>
       <box flexDirection="row" justifyContent="flex-end" paddingBottom={1}>
         <box paddingLeft={3} paddingRight={3} backgroundColor={theme.primary} onMouseUp={() => dialog.clear()}>
           <text fg={theme.selectedListItemText}>ok</text>
