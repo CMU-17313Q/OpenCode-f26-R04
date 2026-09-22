@@ -1461,7 +1461,11 @@ export function Prompt(props: PromptProps) {
                           >
                             {local.model.parsed().model}
                           </text>
+                          <Show when={local.model.parsed().model === "Big Pickle"}>
+                            <text fg={fadeColor(theme.warning, modelMetaAlpha())}>[STEALTH]</text>
+                          </Show>
                           <text fg={fadeColor(theme.textMuted, modelMetaAlpha())}>{currentProviderLabel()}</text>
+   
                           <Show when={showVariant()}>
                             <text fg={fadeColor(theme.textMuted, variantMetaAlpha())}>·</text>
                             <text>
