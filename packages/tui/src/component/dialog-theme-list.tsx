@@ -3,12 +3,50 @@ import { useTheme } from "../context/theme"
 import { useDialog } from "../ui/dialog"
 import { onCleanup } from "solid-js"
 
+const themeEmojis: Record<string, string> = {
+  aura: "✨",
+  ayu: "🐟",
+  carbonfox: "🦊",
+  catppuccin: "☕",
+  "catppuccin-frappe": "🥤",
+  "catppuccin-macchiato": "🥛",
+  cobalt2: "🔵",
+  cursor: "🖱️",
+  dracula: "🧛",
+  everforest: "🌲",
+  flexoki: "🖋️",
+  github: "🐙",
+  gruvbox: "🍂",
+  kanagawa: "🌊",
+  "lucent-orng": "🍊",
+  material: "🧱",
+  matrix: "🟢",
+  mercury: "🪐",
+  monokai: "🌈",
+  nightowl: "🦉",
+  nord: "❄️",
+  "one-dark": "🌑",
+  opencode: "💻",
+  orng: "🍊",
+  "osaka-jade": "💚",
+  palenight: "🌙",
+  rosepine: "🌹",
+  rosenpine: "🌹",
+  solarized: "☀️",
+  synthwave84: "🎹",
+  system: "🖥️",
+  tokyonight: "🌃",
+  vercel: "🚀",
+  vesper: "🌇",
+  zenburn: "🔥",
+}
+
 export function DialogThemeList() {
   const theme = useTheme()
   const options = Object.keys(theme.all())
     .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }))
     .map((value) => ({
-      title: value,
+      title: `${themeEmojis[value] ?? "✨"} ${value}`,
       value: value,
     }))
   const dialog = useDialog()
