@@ -132,6 +132,7 @@
     "minimatch": "10.0.3",
     "npm-package-arg": "13.0.2",
     "open": "10.1.2",
+    "openai": "6.39.1",
     "opencode-gitlab-auth": "2.1.0",
     "opencode-poe-auth": "0.0.1",
     "opentui-spinner": "catalog:",
