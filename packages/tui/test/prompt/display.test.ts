@@ -1,7 +1,15 @@
 import { describe, expect, test } from "bun:test"
-import { displayCharAt, displaySlice, mentionTriggerIndex } from "../../src/prompt/display"
+import { displayCharAt, displaySlice, formatCharacterCount, mentionTriggerIndex } from "../../src/prompt/display"
 
 describe("prompt display", () => {
+  test("formats user-perceived character counts", () => {
+    expect(formatCharacterCount("")).toBe("0 characters")
+    expect(formatCharacterCount("a")).toBe("1 character")
+    expect(formatCharacterCount("hello")).toBe("5 characters")
+    expect(formatCharacterCount("e\u0301")).toBe("1 character")
+    expect(formatCharacterCount("👨‍👩‍👧‍👦")).toBe("1 character")
+  })
+
   test("uses display-width offsets for mentions", () => {
     expect(mentionTriggerIndex("@")).toBe(0)
     expect(mentionTriggerIndex("test @")).toBe(5)

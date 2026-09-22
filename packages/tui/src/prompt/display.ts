@@ -1,5 +1,10 @@
 const graphemes = new Intl.Segmenter(undefined, { granularity: "grapheme" })
 
+export function formatCharacterCount(value: string) {
+  const count = Array.from(graphemes.segment(value)).length
+  return `${count} ${count === 1 ? "character" : "characters"}`
+}
+
 export function promptOffsetWidth(value: string) {
   let width = 0
   for (const part of graphemes.segment(value)) {
