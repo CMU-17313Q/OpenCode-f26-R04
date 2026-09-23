@@ -1309,14 +1309,9 @@ export function Prompt(props: PromptProps) {
   const borderHighlight = createMemo(() => tint(theme.border, highlight(), agentMetaAlpha()))
 
   const placeholderText = createMemo(() => {
-    if (props.showPlaceholder === false) return undefined
-    if (store.mode === "shell") {
-      if (!shell().length) return undefined
-      const example = shell()[store.placeholder % shell().length]
-      return `Run a command… "${example}"`
-    }
-    if (!list().length) return undefined
-    return `Ask anything… "${list()[store.placeholder % list().length]}"`
+  if (props.showPlaceholder === false) return undefined
+  if (store.mode === "shell") return "Run a command…"
+  return "Describe what you want to build, fix, or understand"
   })
 
   const spinnerDef = createMemo(() => {
