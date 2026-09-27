@@ -57,7 +57,7 @@ export class RunFailedError extends Error {
 export type Child = ChildProcess & { exited: Promise<number> }
 
 export function spawn(cmd: string[], opts: Options = {}): Child {
-  if (cmd.length === 0) throw new Error("Command is required")
+  if (cmd.length === 0) throw new Error("A command is required")
   opts.abort?.throwIfAborted()
 
   const proc = launch(cmd[0], cmd.slice(1), {
