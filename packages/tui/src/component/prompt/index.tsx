@@ -338,6 +338,7 @@ export function Prompt(props: PromptProps) {
         title: "Clear prompt",
         name: "prompt.clear",
         category: "Prompt",
+        slashName: "clear",
         hidden: true,
         run: () => {
           clearPrompt()
