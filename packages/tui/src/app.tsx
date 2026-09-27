@@ -827,6 +827,16 @@ function App(props: { onSnapshot?: () => Promise<string[]>; pluginHost: TuiPlugi
         category: "System",
       },
       {
+        name: "app.hello",
+        title: "Say hello",
+        slashName: "hello",
+        run: () => {
+          toast.show({ message: "Hello from OpenCode!", variant: "success" })
+          dialog.clear()
+        },
+        category: "System",
+      },
+      {
         name: "app.exit",
         title: "Exit the app",
         slashName: "exit",
