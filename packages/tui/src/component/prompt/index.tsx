@@ -1316,7 +1316,7 @@ export function Prompt(props: PromptProps) {
       return `Run a command… "${example}"`
     }
     if (!list().length) return undefined
-    return `Ask anything… "${list()[store.placeholder % list().length]}"`
+    return `What are we building today? Try "${list()[store.placeholder % list().length]}"`  
   })
 
   const spinnerDef = createMemo(() => {
