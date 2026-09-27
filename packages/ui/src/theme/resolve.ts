@@ -397,18 +397,18 @@ export function resolveThemeVariant(variant: ThemeVariant, isDark: boolean): Res
     tokens["syntax-diff-delete"] = diffDelete[10]
     tokens["syntax-diff-unknown"] = "#ff0000"
 
-    tokens["markdown-heading"] = isDark ? "#9d7cd8" : "#d68c27"
+    tokens["markdown-heading"] = isDark ? "#dc5fa3" : "#b5397c"
     tokens["markdown-text"] = isDark ? "#eeeeee" : "#1a1a1a"
-    tokens["markdown-link"] = isDark ? "#fab283" : "#3b7dd8"
+    tokens["markdown-link"] = isDark ? "#ff8bab" : "#dc5793"
     tokens["markdown-link-text"] = isDark ? "#56b6c2" : "#318795"
     tokens["markdown-code"] = isDark ? "#7fd88f" : "#3d9a57"
     tokens["markdown-block-quote"] = isDark ? "#e5c07b" : "#b0851f"
     tokens["markdown-emph"] = isDark ? "#e5c07b" : "#b0851f"
-    tokens["markdown-strong"] = isDark ? "#f5a742" : "#d68c27"
+    tokens["markdown-strong"] = isDark ? "#f26aa4" : "#b5397c"
     tokens["markdown-horizontal-rule"] = isDark ? "#808080" : "#8a8a8a"
-    tokens["markdown-list-item"] = isDark ? "#fab283" : "#3b7dd8"
+    tokens["markdown-list-item"] = isDark ? "#ff8bab" : "#dc5793"
     tokens["markdown-list-enumeration"] = isDark ? "#56b6c2" : "#318795"
-    tokens["markdown-image"] = isDark ? "#fab283" : "#3b7dd8"
+    tokens["markdown-image"] = isDark ? "#ff8bab" : "#dc5793"
     tokens["markdown-image-text"] = isDark ? "#56b6c2" : "#318795"
     tokens["markdown-code-block"] = isDark ? "#eeeeee" : "#1a1a1a"
   }
