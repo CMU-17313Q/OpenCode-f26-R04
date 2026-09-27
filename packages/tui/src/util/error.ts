@@ -155,6 +155,18 @@ export function errorMessage(error: unknown): string {
   return "unknown error"
 }
 
+export function errorHint(error: unknown): string | undefined {
+  if (!isRecord(error)) return undefined
+  const data = isRecord(error.data) ? error.data : undefined
+  if (
+    error.name === "ProviderAuthError" ||
+    (error.name === "APIError" && data?.statusCode === 401) ||
+    /free tier/i.test(errorMessage(error))
+  )
+    return "Run /connect to add or update an AI provider"
+  return undefined
+}
+
 export function errorData(error: unknown) {
   if (error instanceof Error) {
     return {
